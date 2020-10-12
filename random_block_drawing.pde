@@ -1,41 +1,68 @@
-int board[][];
+int blockSize = 100;
 
-int offSet;
-int blockWidth = 100;
-int blockHeight = 100;
 
 void setup() {
   size(500, 500);
 }
 
 void draw(){
-  vertical(100);
-  horizontal();
+  
+  for(int i = 0; i < width; i += 100) {
+    
+    horizontal(i, 0);
+    horizontal(i, 100);
+    horizontal(i, 200);
+    horizontal(i, 300);
+    horizontal(i, 400);
+  
+  }
+  
+  
+  vertical(200, 200);
+ 
+  
+  //diagonalLToR(400);
+  //diagonalRToL(100, 0);
 }
 
-void vertical(int num) {
-  offSet = offSet + num;
-  for (int i = 0; i < blockWidth; i+= 5) {
-    line(i+offSet, 0+offSet, i+offSet, blockHeight+offSet);
+
+
+
+// code for drawing blocks
+
+void horizontal(int x, int y){
+  int offSet;
+  offSet = y;
+  for (int i = offSet; i < blockSize+offSet; i += 5) {
+      line(0+x, i, blockSize+x, i);
   }
 }
 
-void diagonalRightToLeft(){
-  for (int i = 0; i < blockWidth; i += 5) {
-        line(blockWidth - i, 0, 0, blockHeight - i); // upper
-        line(blockWidth, i,  i, blockHeight); // lower
+void vertical(int x, int y) {
+  int offSet;
+  offSet = x;
+  for (int i = offSet; i < blockSize+offSet; i+= 5) {
+    line(i, 0+y, i, blockSize+y);
+  }
+}
+
+
+
+void diagonalRToL(int x, int y){
+  int offSet;
+  offSet = x + y;
+  for (int i = offSet; i < blockSize+offSet; i += 5) {
+        line(offSet,i,i,blockSize); // upper
+        //line(i, offSet+blockSize,  offSet+blockSize, i); // lower
     }
 }
 
-void diagonalLeftToRight(){
-  for (int i = 0; i < blockWidth; i += 5) {
-      line(i, 0, blockWidth, blockHeight - i); // upper
-      line(0, i, blockWidth - i, blockHeight); // lower
+void diagonalLToR(int num){
+   int offSet;
+  offSet = num;
+  for (int i = offSet; i < blockSize+offSet; i += 5) {
+      line(i, 0, blockSize, blockSize - i); // upper
+      line(0, i, blockSize - i, blockSize); // lower
   }
 }
 
-void horizontal(){
-  for (int i = 0; i < blockWidth; i += 5) {
-      line(0, i, blockWidth, i);
-  }
-}
